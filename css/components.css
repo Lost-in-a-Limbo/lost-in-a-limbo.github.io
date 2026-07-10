@@ -207,13 +207,16 @@
 .dgm-caption { fill: var(--text-mute); font-family: var(--font-mono); font-size: 9px; opacity: 0; transition: opacity 0.6s var(--ease-out-expo) 0.5s; }
 .draw .dgm-caption { opacity: 1; }
 
-/* Flowing dashes */
+/* Flowing dashes — appear after edge draws in (1.2s delay) */
 .dgm-flow {
   fill: none; stroke: var(--accent); stroke-width: 1.6;
   stroke-dasharray: 3 9; stroke-linecap: round;
   opacity: 0;
 }
-.draw .dgm-flow { opacity: 0.9; animation: flowDash 1.1s linear infinite; }
+.draw .dgm-flow {
+  opacity: 0.75;
+  animation: flowDash 1.1s linear 1.2s infinite;
+}
 
 /* Data packet */
 .dgm-packet { fill: var(--accent-bright); filter: drop-shadow(0 0 6px var(--accent)); }
