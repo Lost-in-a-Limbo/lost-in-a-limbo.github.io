@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Utkarsh Tuteja — AI Systems Engineer</title>
+  <meta name="description" content="AI Systems Engineer & Full-Stack Developer building production-ready AI — RAG pipelines, ML systems and scalable backends." />
+  <meta name="author" content="Utkarsh Tuteja" />
+  <meta name="theme-color" content="#050506" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Utkarsh Tuteja — AI Systems Engineer" />
+  <meta property="og:description" content="Building production-ready AI: RAG pipelines, ML systems and scalable backends." />
+  <meta property="og:url" content="https://lost-in-a-limbo.github.io/" />
+  <meta property="og:image" content="assets/og-image.svg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Utkarsh Tuteja — AI Systems Engineer" />
+  <meta name="twitter:description" content="Building production-ready AI: RAG pipelines, ML systems and scalable backends." />
+  <meta name="twitter:image" content="assets/og-image.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Fonts: Space Grotesk (display) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <!-- Morphing WebGL shader-mesh background -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__brand" href="#top" aria-label="Home">
+        <span class="nav__monogram" aria-hidden="true">UT</span>
+        <span class="nav__name">Utkarsh Tuteja</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav__cta btn btn--ghost" href="assets/Utkarsh_Tuteja_resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__progress" id="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <canvas id="hero-graph" aria-hidden="true"></canvas>
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal" data-reveal>
+          <span class="dot" aria-hidden="true"></span>
+          <span id="hero-availability">Open to AI / ML / SWE roles</span>
+        </p>
+        <h1 class="hero__title">
+          <span class="reveal-line"><span data-reveal-text>Utkarsh</span></span>
+          <span class="reveal-line"><span data-reveal-text class="hero__accent">Tuteja</span></span>
+        </h1>
+        <p class="hero__subtitle reveal" data-reveal>
+          <span class="brk" aria-hidden="true">[</span>
+          <span id="hero-subtitle"></span>
+          <span class="brk" aria-hidden="true">]</span>
+          <span class="caret" aria-hidden="true"></span>
+        </p>
+        <p class="hero__positioning reveal" data-reveal id="hero-positioning"></p>
+        <div class="hero__actions reveal" data-reveal>
+          <a class="btn btn--solid" href="#work">View Work</a>
+          <a class="btn btn--ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <a class="hero__scroll reveal" data-reveal href="#about" aria-label="Scroll to about">
+        <span>scroll</span>
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section__label" data-reveal>[ 01 / about ]</div>
+      <div class="about" id="about-body"></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section__label" data-reveal>[ 02 / skills ]</div>
+      <h2 class="section__title" data-reveal>The toolkit</h2>
+      <div class="skills" id="skills-body"></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="section__label" data-reveal>[ 03 / experience ]</div>
+      <h2 class="section__title" data-reveal>Where I've built</h2>
+      <div class="experience" id="experience-body"></div>
+    </section>
+
+    <!-- WORK / PROJECTS -->
+    <section class="section" id="work">
+      <div class="section__label" data-reveal>[ 04 / selected work ]</div>
+      <h2 class="section__title" data-reveal>Projects</h2>
+      <p class="section__intro" data-reveal>Systems built end-to-end, ordered by the engineering behind them.</p>
+      <div class="projects" id="projects-body"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section--contact" id="contact">
+      <div class="section__label" data-reveal>[ 05 / contact ]</div>
+      <h2 class="contact__title" data-reveal>Let's build something that ships.</h2>
+      <p class="contact__lead" data-reveal id="contact-lead"></p>
+      <div class="contact__grid" id="contact-body"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__mono">UT</span>
+      <p id="footer-note"></p>
+      <a href="#top" class="footer__top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Project modal -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__panel" role="document">
+      <button class="modal__close" aria-label="Close" data-modal-close>&times;</button>
+      <div class="modal__content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

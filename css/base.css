@@ -1,0 +1,112 @@
+/* ============================================================
+   base.css — reset, typography, global primitives
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Subtle cold vignette so the shader mesh reads as depth, not flat color */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% -10%, transparent 55%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(180deg, rgba(5,5,6,0.2) 0%, transparent 25%, transparent 70%, rgba(5,5,6,0.55) 100%);
+}
+
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-bg);
+  display: block;
+}
+
+img, canvas { display: block; max-width: 100%; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--accent); color: #04121a; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background: var(--accent);
+  color: #04121a;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: top var(--dur-fast) var(--ease-out-expo);
+}
+.skip-link:focus { top: 1rem; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1a1e22; border: 2px solid var(--bg); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #262b30; }
+
+/* --- Reveal system (JS toggles .is-visible) --- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity var(--dur) var(--ease-out-expo),
+    transform var(--dur) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+
+.reveal-line { display: block; overflow: hidden; }
+.reveal-line > [data-reveal-text] {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform;
+}
+.hero__title.is-visible .reveal-line > [data-reveal-text] { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] { opacity: 1; transform: none; }
+  .reveal-line > [data-reveal-text] { transform: none; }
+}

@@ -1,0 +1,221 @@
+/* ============================================================
+   layout.css — structural layout: nav, sections, hero, footer
+   ============================================================ */
+
+main { position: relative; z-index: var(--z-content); }
+
+.section {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  padding-block: var(--space-section);
+}
+
+.section__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.section__title {
+  font-size: var(--fs-h2);
+  max-width: 16ch;
+  margin-bottom: 1rem;
+}
+.section__intro {
+  color: var(--text-soft);
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* ---------------- NAV ---------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: background var(--dur) var(--ease-out-expo),
+              border-color var(--dur) var(--ease-out-expo),
+              backdrop-filter var(--dur) var(--ease-out-expo);
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled {
+  background: rgba(5, 5, 6, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: var(--hairline);
+}
+.nav__inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav__brand { display: flex; align-items: center; gap: 0.65rem; font-family: var(--font-display); font-weight: 600; }
+.nav__monogram {
+  display: grid; place-items: center;
+  width: 32px; height: 32px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.8rem; letter-spacing: 0.05em;
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  transition: box-shadow var(--dur) var(--ease-out-expo), background var(--dur) var(--ease-out-expo);
+}
+.nav__brand:hover .nav__monogram { box-shadow: 0 0 18px -2px var(--accent-glow); background: var(--accent-faint); }
+.nav__name { font-size: 0.95rem; }
+.nav__links { margin-left: auto; display: flex; gap: 1.75rem; }
+.nav__links a {
+  font-size: var(--fs-sm);
+  color: var(--text-soft);
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color var(--dur-fast) var(--ease-out-expo);
+}
+.nav__links a::after {
+  content: ""; position: absolute; left: 0; bottom: -2px;
+  width: 100%; height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur) var(--ease-out-expo);
+}
+.nav__links a:hover, .nav__links a.is-active { color: var(--text); }
+.nav__links a:hover::after, .nav__links a.is-active::after { transform: scaleX(1); }
+.nav__cta { font-size: var(--fs-sm); }
+.nav__toggle { display: none; }
+.nav__progress {
+  position: absolute; left: 0; bottom: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent), var(--accent-bright));
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ---------------- HERO ---------------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  padding-top: var(--nav-h);
+}
+#hero-graph {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+.hero__content { position: relative; z-index: 2; pointer-events: none; max-width: min(100%, 60rem); }
+.hero__content a, .hero__content button { pointer-events: auto; }
+
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 1.5rem;
+}
+.hero__eyebrow .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  animation: pulse 2.4s var(--ease-in-out-quint) infinite;
+}
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  margin-bottom: 1.4rem;
+  max-width: none;
+  overflow: visible;
+}
+/* Each name line clips vertically for the rise animation, not horizontally */
+.hero__title .reveal-line { white-space: nowrap; overflow: hidden; }
+.hero__accent {
+  background: linear-gradient(180deg, var(--accent-bright), var(--accent) 55%, var(--accent-dim));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero__subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 2.4vw, 1.65rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.hero__subtitle .brk { color: var(--text-faint); }
+.hero__subtitle .caret {
+  width: 0.55ch; height: 1.05em;
+  background: var(--accent);
+  display: inline-block;
+  margin-left: 0.1rem;
+  animation: blink 1.05s steps(1) infinite;
+}
+.hero__positioning {
+  color: var(--text-soft);
+  font-size: var(--fs-lead);
+  max-width: 46ch;
+  margin-bottom: 2.25rem;
+}
+.hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem; left: var(--gutter);
+  z-index: 2;
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs); letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-mute);
+}
+.hero__scroll-line { width: 60px; height: 1px; background: var(--hairline-strong); position: relative; overflow: hidden; }
+.hero__scroll-line::after {
+  content: ""; position: absolute; inset: 0; width: 40%;
+  background: var(--accent);
+  animation: scrollLine 2.2s var(--ease-in-out-quint) infinite;
+}
+
+/* ---------------- FOOTER ---------------- */
+.footer {
+  position: relative;
+  z-index: var(--z-content);
+  border-top: 1px solid var(--hairline);
+  background: rgba(5,5,6,0.6);
+  backdrop-filter: blur(6px);
+}
+.footer__inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 2.5rem var(--gutter);
+  display: flex; align-items: center; gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer__mono {
+  font-family: var(--font-display); font-weight: 600;
+  color: var(--accent); border: 1px solid var(--hairline-strong);
+  padding: 0.35rem 0.6rem; border-radius: var(--radius);
+}
+.footer__inner p { color: var(--text-mute); font-size: var(--fs-sm); }
+.footer__top { margin-left: auto; color: var(--text-soft); font-size: var(--fs-sm); }
+.footer__top:hover { color: var(--accent); }
