@@ -8,7 +8,7 @@ export const profile = {
   name: "Utkarsh Tuteja",
   initials: "UT",
   tagline: "AI Systems Engineer",
-  roles: ["AI Systems Engineer", "Full-Stack Developer", "ML / RAG Systems"],
+  roles: ["AI Systems Engineer", "Full-Stack AI Builder", "Machine Learning Engineer"],
   positioning:
     "I build end-to-end AI systems — from ML & RAG pipelines to scalable backends and production apps — turning complex ideas into software that ships and runs with real users.",
   location: "Bengaluru, India",

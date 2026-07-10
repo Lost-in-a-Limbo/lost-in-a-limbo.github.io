@@ -16,8 +16,51 @@ function el(tag, cls, html) {
 function renderHero() {
   $("#hero-availability").textContent = profile.availability;
   $("#hero-positioning").textContent = profile.positioning;
-  const sub = $("#hero-subtitle");
-  if (sub) sub.textContent = profile.tagline;
+  initTypewriter();
+}
+
+function initTypewriter() {
+  const subtitleEl = $("#hero-subtitle");
+  if (!subtitleEl) return;
+
+  const roles = profile.roles;
+  let roleIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+
+  // Timing (ms)
+  const TYPE_SPEED   = 68;
+  const DELETE_SPEED = 38;
+  const HOLD_PAUSE   = 2000;
+  const START_PAUSE  = 380;
+
+  function tick() {
+    const current = roles[roleIdx];
+
+    if (!isDeleting) {
+      subtitleEl.textContent = current.slice(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        isDeleting = true;
+        setTimeout(tick, HOLD_PAUSE);
+        return;
+      }
+      setTimeout(tick, TYPE_SPEED);
+    } else {
+      subtitleEl.textContent = current.slice(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        setTimeout(tick, START_PAUSE);
+        return;
+      }
+      setTimeout(tick, DELETE_SPEED);
+    }
+  }
+
+  // Delay so the hero entrance animation plays first
+  setTimeout(tick, 800);
 }
 
 function renderAbout() {
